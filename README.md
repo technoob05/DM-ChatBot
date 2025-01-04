@@ -6,6 +6,9 @@ An intelligent chatbot built with Flask and Google's Gemini AI, featuring voice 
 ![Python](https://img.shields.io/badge/python-v3.6+-blue.svg)
 ![Flask](https://img.shields.io/badge/flask-v2.3.2-green.svg)
 
+##Screenshot 
+![image](https://github.com/user-attachments/assets/6436fece-fb7b-48c5-b5a9-82d60b55997b)
+
 ## Features
 
 - 🤖 AI-powered responses using Google's Gemini AI
