@@ -1,0 +1,553 @@
+/* Root variables and basic styles */
+:root {
+    --primary-color: #5E49FF;
+    --secondary-color: #7E6BFF;
+    --background-light: #FFFFFF;
+    --background-dark: #1A1A1A;
+    --text-light: #333333;
+    --text-dark: #FFFFFF;
+    --message-user: #E9ECEF;
+    --message-bot: #F8F9FA;
+    --border-radius: 12px;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background-color: var(--background-light);
+    color: var(--text-light);
+    line-height: 1.6;
+    transition: background-color 0.3s ease;
+}
+
+/* Layout Containers */
+.chat-container {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.chat-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 1rem;
+}
+
+.chat-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin: 0;
+}
+
+.chat-box {
+    height: calc(100vh - 250px);
+    overflow-y: auto;
+    padding: 1rem;
+    background: var(--background-light);
+    border: 1px solid #eee;
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Message Styles */
+.message {
+    max-width: 80%;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    position: relative;
+}
+
+.user-message {
+    background: var(--message-user);
+    margin-left: auto;
+}
+
+.bot-message {
+    background: var(--message-bot);
+    margin-right: auto;
+}
+
+.message-content {
+    margin-top: 0.5rem;
+}
+
+.message-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+/* Input Area */
+.input-container {
+    position: relative;
+    margin-top: 1rem;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.input-box {
+    flex: 1;
+    padding: 1rem;
+    border: 1px solid #eee;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    background: var(--background-light);
+    color: var(--text-light);
+    transition: border-color 0.3s ease;
+}
+
+.input-box:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(94, 73, 255, 0.1);
+}
+
+/* File Upload */
+.file-upload-container {
+    position: relative;
+    margin-right: 0.5rem;
+}
+
+.file-upload-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.file-upload-btn input[type="file"] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    cursor: pointer;
+    display: block;
+}
+
+/* File Preview */
+.file-preview {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    background: rgba(0,0,0,0.05);
+    border-radius: var(--border-radius);
+    margin-top: 0.5rem;
+    animation: slideIn 0.3s ease;
+}
+
+.file-preview i {
+    margin-right: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.file-preview span {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Buttons */
+.btn {
+    padding: 0.75rem 1rem;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: white;
+}
+
+.btn-icon {
+    background: transparent;
+    color: var(--primary-color);
+    padding: 0.75rem;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(94, 73, 255, 0.2);
+}
+
+/* Emoji Picker */
+.emoji-picker {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    background: white;
+    border: 1px solid #eee;
+    border-radius: var(--border-radius);
+    padding: 1rem;
+    width: 320px;
+    display: none;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.emoji-picker.visible {
+    display: grid !important;
+}
+
+.emoji-btn {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: transform 0.2s ease;
+    padding: 0;
+}
+
+.emoji-btn:hover {
+    background-color: #f0f0f0;
+    transform: scale(1.1);
+}
+
+/* Copy Button */
+.copy-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: rgba(94, 73, 255, 0.1);
+    border: none;
+    color: var(--primary-color);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.875rem;
+    opacity: 0;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.copy-btn i {
+    font-size: 0.875rem;
+}
+
+.message-content-wrapper:hover .copy-btn,
+.code-wrapper:hover .copy-btn {
+    opacity: 1;
+}
+
+.copy-success {
+    background: #28a745 !important;
+    color: white !important;
+}
+
+/* Loading Animation */
+.loading {
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0;
+}
+
+.loading-dots {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.loading-dots span {
+    width: 8px;
+    height: 8px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    animation: bounce 0.5s infinite alternate;
+}
+
+.loading-dots span:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.loading-dots span:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+@keyframes bounce {
+    to {
+        transform: translateY(-4px);
+    }
+}
+
+/* Dark Mode */
+.dark-mode {
+    background-color: var(--background-dark);
+    color: var(--text-dark);
+}
+
+.dark-mode .chat-box {
+    background: var(--background-dark);
+    border-color: #333;
+}
+
+.dark-mode .input-box {
+    background: var(--background-dark);
+    border-color: #333;
+    color: var(--text-dark);
+}
+
+.dark-mode .message {
+    background: #2A2A2A;
+    color: var(--text-dark);
+}
+
+.dark-mode .emoji-picker {
+    background: var(--background-dark);
+    border-color: #333;
+}
+
+.dark-mode .emoji-btn:hover {
+    background-color: #333;
+}
+
+.dark-mode .file-preview {
+    background: rgba(255,255,255,0.1);
+}
+
+.dark-mode .copy-btn {
+    background: rgba(255,255,255,0.1);
+    color: var(--text-dark);
+}
+
+/* Loading indicator enhancements */
+.upload-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    background: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+/* Drop zone styles */
+.drop-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.drop-overlay.active {
+    display: flex;
+}
+
+.drop-message {
+    padding: 2rem;
+    background: white;
+    border-radius: var(--border-radius);
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.drop-message i {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+/* Recording indicator */
+.recording-indicator {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #ff4444;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    z-index: 1000;
+}
+
+/* Code block styles */
+pre {
+    white-space: pre-wrap !important;
+    word-wrap: break-word !important;
+    background: #282a36 !important;
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem 0;
+    overflow-x: auto;
+    position: relative;
+}
+
+pre code {
+    white-space: pre !important;
+    word-wrap: normal !important;
+    display: block;
+    padding: 0.5em;
+    color: #f8f8f2;
+    background: transparent;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+code:not(pre code) {
+    background: #f5f5f5;
+    padding: 2px 4px;
+    border-radius: 4px;
+    color: #e83e8c;
+}
+
+.dark-mode code:not(pre code) {
+    background: #333;
+    color: #ff79c6;
+}
+
+/* Syntax highlighting colors */
+.token.comment { color: #6272a4; }
+.token.keyword { color: #ff79c6; }
+.token.string { color: #f1fa8c; }
+.token.number { color: #bd93f9; }
+.token.function { color: #50fa7b; }
+.token.operator { color: #ff79c6; }
+.token.class-name { color: #8be9fd; }
+.token.property { color: #66d9ef; }
+
+/* Audio controls */
+.audio-controls {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.audio-controls .btn {
+    padding: 0.5rem;
+}
+
+/* Animations */
+@keyframes slideIn {
+    from {
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+/* Microphone animation */
+.fa-microphone.recording {
+    animation: pulse 1.5s infinite;
+    color: #ff4444;
+}
+
+/* Message transitions */
+.message {
+    animation: slideIn 0.3s ease;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .chat-container {
+        margin: 1rem;
+        padding: 0;
+    }
+
+    .message {
+        max-width: 90%;
+    }
+
+    .emoji-picker {
+        width: 280px;
+    }
+
+    .copy-btn {
+        padding: 0.2rem 0.4rem;
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .chat-title {
+        font-size: 1.2rem;
+    }
+
+    .input-box {
+        font-size: 0.9rem;
+    }
+
+    .btn {
+        padding: 0.5rem 0.75rem;
+    }
+
+    .emoji-picker {
+        width: 240px;
+    }
+}
+
+/* Accessibility Improvements */
+.btn:focus, 
+.input-box:focus,
+.emoji-btn:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+.btn:focus:not(:focus-visible),
+.input-box:focus:not(:focus-visible),
+.emoji-btn:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+    :root {
+        --primary-color: #0000ff;
+        --text-light: #000000;
+        --text-dark: #ffffff;
+        --message-user: #e0e0e0;
+        --message-bot: #f0f0f0;
+    }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+}

@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "marked": "^15.0.5",
+    "prismjs": "^1.29.0"
+  }
+}
